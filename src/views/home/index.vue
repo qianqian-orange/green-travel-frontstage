@@ -68,10 +68,8 @@ export default {
     padding-bottom: px2rem(10);
   }
   .home-market {
-    background-color: #fff;
     border-radius: px2rem(8);
     margin-top: px2rem(10);
-    padding: px2rem(10);
     >header {
       position: relative;
       margin-bottom: px2rem(10);

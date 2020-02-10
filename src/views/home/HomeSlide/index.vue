@@ -59,9 +59,6 @@ export default {
     this.slide.destroy();
   },
   methods: {
-    jump() {
-      console.log('jump');
-    },
     init() {
       this.slide = new BScroll(this.$refs.slide, {
         scrollX: true,

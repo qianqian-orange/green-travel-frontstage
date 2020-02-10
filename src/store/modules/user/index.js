@@ -1,30 +1,25 @@
-import axios from 'axios';
-import router from '@/router';
-import { SAVE, CLEAR } from './mutation-types';
+import { SAVE, UPDATE_INTEGRAL } from './mutation-types';
 
 const initState = {
-  data: null,
+  id: -1,
+  name: '',
+  integral: 0,
 };
 
 const actions = {
   save({ commit }, payload) {
     commit(SAVE, payload);
   },
-  clear({ commit }) {
-    axios.get('/api/logout')
-      .then(() => {
-        commit(CLEAR);
-        router.push('/login');
-      });
-  },
 };
 
 const mutations = {
-  [SAVE](state, payload) {
-    state.data = payload;
+  [SAVE](state, { id, name, integral }) {
+    state.id = id;
+    state.name = name;
+    state.integral = integral;
   },
-  [CLEAR](state) {
-    state.data = null;
+  [UPDATE_INTEGRAL](state, payload) {
+    state.integral = payload;
   },
 };
 

@@ -6,20 +6,17 @@
       </router-link>
       <merchandise-search @search="search" />
     </div>
-    <div class="content-container">
-      <van-list
-        v-model="loading"
-        :finished="finished"
-        :immediate-check="false"
-        :finished-text="list.length === 0 ? '' : '我是有底线的'"
-        @load="load"
-      >
-        <div class="list-container">
-          <merchandise-list :list="list" />
-          <div class="empty" v-show="list.length === 0 && !loading">暂无相关数据</div>
-        </div>
-      </van-list>
-    </div>
+    <list-scroll-view
+      :dataSource="list"
+      :loading="loading"
+      :finished="finished"
+      :interval="400"
+      @scroll="scroll"
+    >
+      <div class="content-container" ref="content-container">
+        <merchandise-list :list="list" />
+      </div>
+    </list-scroll-view>
     <transition name="detail">
       <router-view></router-view>
     </transition>
@@ -28,6 +25,7 @@
 
 <script>
 import { mapActions, mapState, mapMutations } from 'vuex';
+import ListScrollView from '@/components/ListScrollView/index.vue';
 import MerchandiseList from '@/components/MerchandiseList/index.vue';
 import { CLEAR } from '@/store/modules/merchandise/mutation-types';
 import MerchandiseSearch from './search.vue';
@@ -42,6 +40,7 @@ export default {
   components: {
     MerchandiseList,
     MerchandiseSearch,
+    ListScrollView,
   },
   computed: {
     ...mapState('merchandise', {
@@ -62,6 +61,10 @@ export default {
       this.getTotal();
       this.getData(this.handle);
     },
+    scroll() {
+      this.loading = true;
+      this.getData(this.handle);
+    },
     ...mapActions('merchandise', ['getData', 'getTotal']),
     ...mapMutations('merchandise', [CLEAR]),
   },
@@ -78,7 +81,10 @@ export default {
 
 <style lang="scss" scoped>
   .merchandise-container {
-    padding-top: 74px;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 54px px2rem(10) 0 px2rem(10);
     .header {
       box-sizing: border-box;
       position: fixed;
@@ -102,18 +108,7 @@ export default {
       }
     }
     .content-container {
-      padding: 0 px2rem(10);
-      .list-container {
-        padding: px2rem(10);
-        background-color: #fff;
-        border-radius: px2rem(4);
-      }
-      .empty {
-        text-align: center;
-        line-height: px2rem(30);
-        font-size: px2rem(14);
-        color: #999;
-      }
+      padding-top: px2rem(10);
     }
     .detail-enter, .detail-leave-to {
       transform: translateX(100%);

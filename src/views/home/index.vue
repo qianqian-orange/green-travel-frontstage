@@ -82,7 +82,7 @@ export default {
       .arrow {
         position: absolute;
         top: px2rem(2);
-        right: 0;
+        right: px2rem(4);
         width: px2rem(10);
         height: px2rem(10);
         border-top: 1px solid #999;

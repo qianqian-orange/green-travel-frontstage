@@ -25,6 +25,9 @@ export default {
     scrollTo(x, y) {
       this.scroll.scrollTo(x, y);
     },
+    scrollToElement(el) {
+      this.scroll.scrollToElement(el);
+    },
     initScroll() {
       this.scroll = new BScroll(this.$refs['scroll-container'], {
         probeType: this.probeType,

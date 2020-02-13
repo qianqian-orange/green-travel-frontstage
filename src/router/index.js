@@ -11,11 +11,6 @@ const routes = [
     component: () => import('@/views/login/index.vue'),
   },
   {
-    path: '/advertisement',
-    name: 'Advertisement',
-    component: () => import('@/views/advertisement/index.vue'),
-  },
-  {
     path: '/merchandise',
     name: 'Merchandise',
     component: () => import('@/views/merchandise/index.vue'),
@@ -28,8 +23,9 @@ const routes = [
     ],
   },
   {
-    path: '/test',
-    component: () => import('@/views/test/index.vue'),
+    path: '/signIn',
+    name: 'SignIn',
+    component: () => import('@/views/signIn/index.vue'),
   },
   {
     path: '/',

@@ -4,6 +4,7 @@ import {
   GET_DATA,
   GET_TOTAL,
   CLEAR,
+  CONVERSION,
   UPDATE_CONDITION,
 } from './mutation-types';
 
@@ -67,6 +68,10 @@ const mutations = {
   [GET_TOTAL](state, payload) {
     state.total = payload;
     if (state.total === 0 || state.total <= state.pageSize) state.finished = true;
+  },
+  [CONVERSION](state, { id }) {
+    const merchandise = state.list.find(item => item.id === id);
+    if (merchandise) merchandise.stock -= 1;
   },
   [UPDATE_CONDITION](state, payload) {
     const { name } = payload;

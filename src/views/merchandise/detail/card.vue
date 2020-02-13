@@ -15,7 +15,8 @@
           <span class="pre-integral">{{ merchandise.integral | preIntegral }}</span>
           <span class="last-integral">{{ merchandise.integral | lastIntegral }}</span>
         </div>
-        <van-button type="primary" size="small" @click="conversion">兑换</van-button>
+        <van-button v-if="merchandise.stock" type="primary" size="small" @click="conversion">兑换</van-button>
+        <van-tag v-if="merchandise.stock === 0" plain type="danger">已售馨</van-tag>
       </div>
     </div>
   </div>
@@ -34,6 +35,11 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapState('user', {
+      user: state => state,
+    }),
+  },
   filters: {
     preIntegral(integral) {
       return parseInt(integral, 10);
@@ -42,11 +48,6 @@ export default {
       const [, decimal] = `${integral}`.split('.');
       return decimal ? `.${decimal}` : '';
     },
-  },
-  computed: {
-    ...mapState('user', {
-      user: state => state,
-    }),
   },
   methods: {
     conversion() {
@@ -62,8 +63,9 @@ export default {
           this.$notify({ type: 'danger', message: '兑换失败！' });
           return;
         }
-        this[UPDATE_INTEGRAL]((this.user.integral * 100 - this.merchandise.integral * 100) / 100);
         this.$notify({ type: 'success', message: '兑换成功！' });
+        this[UPDATE_INTEGRAL]({ integral: this.merchandise.integral, operator: '-' });
+        this.$emit('conversion');
       });
     },
     ...mapMutations('user', [UPDATE_INTEGRAL]),

@@ -16,7 +16,7 @@
       @scroll="scroll"
       ref="scroll">
       <div class="scroll-contaienr">
-        <merchandise-detail-card v-if="merchandise" :merchandise="merchandise" />
+        <merchandise-detail-card v-if="merchandise" :merchandise="merchandise" @conversion="conversion" />
         <div v-if="others.length > 0">
         <van-divider :style="{ color: '#222' }">看了又看</van-divider>
         <div class="list-container">
@@ -59,13 +59,16 @@ export default {
     },
   },
   computed: {
-    ...mapState('merchandise', {
-      list: state => state.list,
-    }),
     others() {
       const { id } = this.$route.params;
       return this.list.filter(item => item.id !== +id).splice(0, 5);
     },
+    ...mapState('merchandise', {
+      list: state => state.list,
+    }),
+    ...mapState('user', {
+      user: state => state,
+    }),
   },
   components: {
     MerchandiseList,
@@ -76,6 +79,9 @@ export default {
     scroll({ y }) {
       if (y <= -80) this.header = true;
       else this.header = false;
+    },
+    conversion() {
+      this.merchandise.stock -= 1;
     },
   },
   mounted() {

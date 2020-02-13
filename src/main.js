@@ -9,6 +9,8 @@ import {
   Icon,
   Divider,
   Toast,
+  Tag,
+  Popup,
 } from 'vant';
 import BScroll from '@better-scroll/core';
 import Slide from '@better-scroll/slide';
@@ -29,6 +31,8 @@ Vue.use(Image);
 Vue.use(Icon);
 Vue.use(Divider);
 Vue.use(Toast);
+Vue.use(Tag);
+Vue.use(Popup);
 BScroll.use(Slide);
 Vue.config.productionTip = false;
 

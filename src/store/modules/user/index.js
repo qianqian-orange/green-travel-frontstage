@@ -18,8 +18,12 @@ const mutations = {
     state.name = name;
     state.integral = integral;
   },
-  [UPDATE_INTEGRAL](state, payload) {
-    state.integral = payload;
+  [UPDATE_INTEGRAL](state, { integral, operator }) {
+    if (operator === '+') {
+      state.integral = (parseInt(state.integral * 100, 10) + parseInt(integral * 100, 10)) / 100;
+      return;
+    }
+    state.integral = (parseInt(state.integral * 100, 10) - parseInt(integral * 100, 10)) / 100;
   },
 };
 

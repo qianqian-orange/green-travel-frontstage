@@ -1,30 +1,30 @@
 <template>
-  <ul class="home-nav">
-    <li class="item">
+  <div class="home-nav">
+    <router-link class="item" to="/signIn">
       <div class="icon daily">
         <span class="text">{{ daily }}</span>
       </div>
       <span class="title">签到</span>
-    </li>
-    <li class="item">
+    </router-link>
+    <router-link class="item" to="/signIn">
       <span class="icon">
         <i class="iconfont icon-rongyu"></i>
       </span>
       <span class="title">成就</span>
-    </li>
-    <li class="item">
+    </router-link>
+    <router-link class="item" to="/signIn">
       <span class="icon">
         <i class="iconfont icon-iconfontyouxihudong"></i>
       </span>
       <span class="title">游戏</span>
-    </li>
-    <li class="item">
+    </router-link>
+    <router-link class="item" to="/signIn">
       <span class="icon">
         <i class="iconfont icon-renwu"></i>
       </span>
       <span class="title">任务</span>
-    </li>
-  </ul>
+    </router-link>
+  </div>
 </template>
 
 <script>
@@ -54,7 +54,7 @@ export default {
     background-color: #fff;
     box-shadow: 0 px2rem(2) px2rem(6) rgba(0,0,0,.08);
 
-    >.item {
+    .item {
       flex: 1;
       display: flex;
       flex-direction: column;

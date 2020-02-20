@@ -15,7 +15,7 @@
           <span class="pre-integral">{{ merchandise.integral | preIntegral }}</span>
           <span class="last-integral">{{ merchandise.integral | lastIntegral }}</span>
         </div>
-        <van-button v-if="merchandise.stock" type="primary" size="small" @click="conversion">兑换</van-button>
+        <van-button :disabled="loading" v-if="merchandise.stock" type="primary" size="small" @click="conversion">兑换</van-button>
         <van-tag v-if="merchandise.stock === 0" plain type="danger">已售馨</van-tag>
       </div>
     </div>
@@ -34,6 +34,11 @@ export default {
       type: Object,
       required: true,
     },
+  },
+  data() {
+    return {
+      loading: false,
+    };
   },
   computed: {
     ...mapState('user', {
@@ -55,6 +60,8 @@ export default {
         this.$toast({ type: 'fail', message: '积分不足！' });
         return;
       }
+      if (this.loading) return;
+      this.loading = true;
       axios.post('/api/merchandise/conversion', {
         id: this.merchandise.id,
       }).then((result) => {
@@ -66,6 +73,8 @@ export default {
         this.$notify({ type: 'success', message: '兑换成功！' });
         this[UPDATE_INTEGRAL]({ integral: this.merchandise.integral, operator: '-' });
         this.$emit('conversion');
+      }).finally(() => {
+        this.loading = false;
       });
     },
     ...mapMutations('user', [UPDATE_INTEGRAL]),

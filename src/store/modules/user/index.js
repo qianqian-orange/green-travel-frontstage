@@ -4,6 +4,8 @@ const initState = {
   id: -1,
   name: '',
   integral: 0,
+  level: 1,
+  growth: 0,
 };
 
 const actions = {
@@ -13,10 +15,18 @@ const actions = {
 };
 
 const mutations = {
-  [SAVE](state, { id, name, integral }) {
+  [SAVE](state, {
+    id,
+    name,
+    integral,
+    growth,
+    level,
+  }) {
     state.id = id;
     state.name = name;
     state.integral = integral;
+    state.growth = growth;
+    state.level = level;
   },
   [UPDATE_INTEGRAL](state, { integral, operator }) {
     if (operator === '+') {

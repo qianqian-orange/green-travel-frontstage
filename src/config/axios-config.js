@@ -1,6 +1,8 @@
 import axios from 'axios';
 import { Notify } from 'vant';
 
+axios.defaults.timeout = 1000;
+
 axios.interceptors.request.use(config => config, (e) => {
   Notify({ type: 'danger', message: '请求超时，请稍后重试！' });
   return Promise.reject(e);

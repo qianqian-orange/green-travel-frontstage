@@ -12,11 +12,11 @@
       </span>
       <span class="title">成就</span>
     </router-link>
-    <router-link class="item" to="/signIn">
+    <router-link class="item" to="/level">
       <span class="icon">
-        <i class="iconfont icon-iconfontyouxihudong"></i>
+        <i class="iconfont icon-dengji"></i>
       </span>
-      <span class="title">游戏</span>
+      <span class="title">等级</span>
     </router-link>
     <router-link class="item" to="/signIn">
       <span class="icon">

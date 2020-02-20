@@ -111,15 +111,14 @@ export default {
 <style lang="scss" scoped>
 .banner-wrapper {
   position: relative;
+  z-index: -1;
 
   >.slide-banner-scroll {
     overflow: hidden;
-
     >.slide-banner-wrapper {
       height: px2rem(160);
       white-space: nowrap;
       font-size: 0;
-
       .slide-item {
         display: inline-block;
         height: 100%;

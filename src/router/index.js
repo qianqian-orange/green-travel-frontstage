@@ -28,6 +28,11 @@ const routes = [
     component: () => import('@/views/signIn/index.vue'),
   },
   {
+    path: '/level',
+    name: 'Level',
+    component: () => import('@/views/level/index.vue'),
+  },
+  {
     path: '/',
     name: 'home',
     component: Home,

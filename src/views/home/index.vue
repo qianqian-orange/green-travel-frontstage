@@ -1,26 +1,32 @@
 <template>
-  <div>
-    <home-slide></home-slide>
-    <div class="container">
-      <home-nav></home-nav>
-      <div class="home-market">
-        <header>
-          <h2 class="title">积分商城</h2>
-          <router-link to="/merchandise">
-            <span class="arrow"></span>
-          </router-link>
-        </header>
-        <div v-if="list.length === 0" class="loading">
-          <van-loading  type="spinner" color="#1989fa" />
+  <scroll-view
+    ref="scroll"
+    :click="true"
+    :dataSource="list">
+    <div>
+      <home-slide></home-slide>
+      <div class="container">
+        <home-nav></home-nav>
+        <div class="home-market">
+          <header>
+            <h2 class="title">积分商城</h2>
+            <router-link to="/merchandise">
+              <span class="arrow"></span>
+            </router-link>
+          </header>
+          <merchandise-list :list="list" />
+          <div v-if="loading" class="loading">
+            <van-loading  type="spinner" color="#1989fa" />
+          </div>
         </div>
-        <merchandise-list v-else :list="list" />
       </div>
     </div>
-  </div>
+  </scroll-view>
 </template>
 
 <script>
 import axios from 'axios';
+import ScrollView from '@/components/ScrollView/index.vue';
 import MerchandiseList from '@/components/MerchandiseList/index.vue';
 import HomeSlide from './HomeSlide/index.vue';
 import HomeNav from './HomeNav/index.vue';
@@ -36,6 +42,7 @@ export default {
     HomeSlide,
     HomeNav,
     MerchandiseList,
+    ScrollView,
   },
   mounted() {
     this.loading = true;

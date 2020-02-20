@@ -31,6 +31,11 @@ export default {
       default: () => [],
     },
   },
+  data() {
+    return {
+      loading: false,
+    };
+  },
   watch: {
     list() {
       this.$nextTick(() => {
@@ -41,6 +46,8 @@ export default {
   },
   methods: {
     signIn(index) {
+      if (this.loading) return;
+      this.loading = true;
       this.$emit('signIn', index);
     },
   },

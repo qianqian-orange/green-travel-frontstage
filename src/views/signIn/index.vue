@@ -26,7 +26,7 @@
             @signIn="signIn"
           />
           <div v-if="loading" class="loading">
-            <van-loading  type="spinner" color="#1989fa" />
+            <van-loading type="spinner" color="#1989fa" />
           </div>
           <p class="end">若连续签到中断，再来领取时只能从头再来哦～</p>
         </div>
@@ -40,6 +40,7 @@ import axios from 'axios';
 import { mapMutations, mapState } from 'vuex';
 import { getDays } from '@/utils/date';
 import ScrollView from '@/components/ScrollView/index.vue';
+import { integrals } from '@/config/conversion';
 import { UPDATE_INTEGRAL } from '@/store/modules/user/mutation-types';
 import SignInHeader from './header.vue';
 import SignInList from './list.vue';
@@ -54,13 +55,6 @@ export default {
       list: [],
       id: -1,
       days: [],
-      integrals: [
-        0.5, 0.3, 1.0, 0.5, 0.6, 1.0, 2.5,
-        1.5, 1.3, 2.0, 1.5, 1.6, 2.0, 3.5,
-        2.5, 2.3, 3.0, 2.5, 3.6, 3.0, 4.5,
-        3.5, 3.3, 4.0, 3.5, 4.6, 4.0, 5.5,
-        4.5, 4.3, 5.0,
-      ],
       date: new Date(),
       day: 0,
       loading: false,
@@ -73,7 +67,7 @@ export default {
   },
   computed: {
     totalIntegral() {
-      const sum = this.integrals.reduce((cur, pre) => (parseInt(cur * 100, 10) + parseInt(pre * 100, 10)) / 100, 0);
+      const sum = integrals.reduce((cur, pre) => (parseInt(cur * 100, 10) + parseInt(pre * 100, 10)) / 100, 0);
       return parseInt(sum, 10);
     },
     ...mapState('user', {
@@ -121,18 +115,18 @@ export default {
       this.list = this.list.map(item => ({
         ...item,
         day: item.day - base,
-        integral: this.integrals[item.day - base],
+        integral: integrals[item.day - base],
       }));
       this.list.push({
         day: current - base,
-        integral: this.integrals[current - base],
+        integral: integrals[current - base],
         type: current === last ? FINISHED : ACTIVE,
       });
       const length = total - current <= 6 ? total - current : 6;
       for (let i = 0; i < length; i += 1) {
         this.list.push({
           day: current - base + i + 1,
-          integral: this.integrals[current - base + i + 1],
+          integral: integrals[current - base + i + 1],
           type: WAIT,
         });
       }

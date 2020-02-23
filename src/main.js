@@ -11,6 +11,11 @@ import {
   Toast,
   Tag,
   Popup,
+  Field,
+  Form,
+  Uploader,
+  DatetimePicker,
+  Stepper,
 } from 'vant';
 import BScroll from '@better-scroll/core';
 import Slide from '@better-scroll/slide';
@@ -32,7 +37,12 @@ Vue.use(Icon);
 Vue.use(Divider);
 Vue.use(Toast);
 Vue.use(Tag);
+Vue.use(Form);
 Vue.use(Popup);
+Vue.use(Field);
+Vue.use(Uploader);
+Vue.use(DatetimePicker);
+Vue.use(Stepper);
 BScroll.use(Slide);
 Vue.config.productionTip = false;
 

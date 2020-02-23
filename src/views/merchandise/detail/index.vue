@@ -1,15 +1,6 @@
 <template>
   <div class="merchandise-detail-container">
-    <transition name="van-fade">
-      <div class="header" v-show="header">
-        <router-link to="/merchandise">
-          <div class="arrow-container">
-            <van-icon name="arrow-left" />
-          </div>
-        </router-link>
-        <h2 class="title">商品详情</h2>
-      </div>
-    </transition>
+    <scroll-header to="/merchandise" title="商品详情" :visible="visible" />
     <scroll-view
       :click="true"
       :probeType="3"
@@ -25,11 +16,6 @@
         </div>
       </div>
     </scroll-view>
-    <router-link to="/merchandise">
-      <div class="arrow-container">
-        <van-icon name="arrow-left" />
-      </div>
-    </router-link>
   </div>
 </template>
 
@@ -37,6 +23,7 @@
 import axios from 'axios';
 import { mapState } from 'vuex';
 import ScrollView from '@/components/ScrollView/index.vue';
+import ScrollHeader from '@/components/ScrollHeader/index.vue';
 import MerchandiseList from '@/components/MerchandiseList/index.vue';
 import MerchandiseDetailCard from './card.vue';
 
@@ -44,7 +31,7 @@ export default {
   name: 'MerchandiseDetail',
   data() {
     return {
-      header: false,
+      visible: false,
       merchandise: null,
     };
   },
@@ -74,11 +61,12 @@ export default {
     MerchandiseList,
     MerchandiseDetailCard,
     ScrollView,
+    ScrollHeader,
   },
   methods: {
     scroll({ y }) {
-      if (y <= -80) this.header = true;
-      else this.header = false;
+      if (y <= -80) this.visible = true;
+      else this.visible = false;
     },
     conversion() {
       this.merchandise.stock -= 1;
@@ -102,6 +90,7 @@ export default {
         this.$refs.scroll.refresh();
         return;
       }
+      this.$router.replace('/merchandise');
       this.$notify({ type: 'danger', message: '数据请求失败' });
     });
   },
@@ -116,37 +105,6 @@ export default {
     right: 0;
     bottom: 0;
     background-color: #fafafc;
-    z-index: 1;
-    .header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: px2rem(44);
-      background-color: #fff;
-      z-index: 1;
-      .title {
-        text-align: center;
-        line-height: px2rem(44);
-        font-size: px2rem(16);
-        color: #222;
-      }
-    }
-    .arrow-container {
-      position: absolute;
-      top: px2rem(7);
-      left: px2rem(8);
-      width: px2rem(30);
-      height: px2rem(30);
-      text-align: center;
-      line-height: px2rem(30);
-      font-size: px2rem(20);
-      background-color: #fff;
-      border-radius: 50%;
-      i {
-        line-height: px2rem(30);
-      }
-    }
     .list-container {
       margin: 0 px2rem(10);
     }

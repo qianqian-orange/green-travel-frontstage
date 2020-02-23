@@ -25,12 +25,12 @@
             @scrollToElement="scrollToElement"
             @signIn="signIn"
           />
-          <div v-if="loading" class="loading">
-            <van-loading type="spinner" color="#1989fa" />
-          </div>
           <p class="end">若连续签到中断，再来领取时只能从头再来哦～</p>
         </div>
       </scroll-view>
+    </div>
+    <div v-if="loading" class="loading">
+      <van-loading type="spinner" color="#1989fa" />
     </div>
   </div>
 </template>
@@ -178,7 +178,6 @@ export default {
       left: 0;
       bottom: 0;
       right: 0;
-      background-color: #fff;
       .header {
         position: relative;
         background-color: #fff;
@@ -221,10 +220,8 @@ export default {
         }
       }
       .main {
+        position: relative;
         background-color: #fff;
-        .loading {
-          text-align: center;
-        }
         .end {
           padding: px2rem(20) 0;
           text-align: center;

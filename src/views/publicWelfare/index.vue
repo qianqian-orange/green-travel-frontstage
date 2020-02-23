@@ -1,20 +1,32 @@
 <template>
-  <div class="merchandise-container">
+  <div class="public-welfare-container">
     <div class="header">
-      <router-link to="/">
-        <span class="arrow"></span>
+      <common-header to="/" title="公益列表" />
+      <router-link class="release" to="/publicWelfare/release">
+        <van-icon name="plus" />
       </router-link>
-      <merchandise-search @search="search" />
     </div>
     <list-scroll-view
       :dataSource="list"
       :loading="loading"
       :finished="finished"
       :interval="400"
-      @scroll="scroll"
-    >
-      <merchandise-list :list="list" />
+      @scroll="scroll">
+      <div class="list">
+        <public-welfare-list-item
+          v-for="item in list"
+          :key="item.id"
+          :id="item.id"
+          :path="item.path"
+          :title="item.title"
+          :endTime="item.end_time"
+          :donate="item.donate"
+          :integral="item.integral" />
+      </div>
     </list-scroll-view>
+    <div v-if="loading" class="loading">
+      <van-loading type="spinner" color="#1989fa" />
+    </div>
     <transition name="detail">
       <router-view></router-view>
     </transition>
@@ -24,35 +36,35 @@
 <script>
 import axios from 'axios';
 import { mapState, mapMutations } from 'vuex';
+import CommonHeader from '@/components/CommonHeader/index.vue';
 import ListScrollView from '@/components/ListScrollView/index.vue';
-import MerchandiseList from '@/components/MerchandiseList/index.vue';
-import { CLEAR, GET_DATA } from '@/store/modules/merchandise/mutation-types';
-import MerchandiseSearch from './search.vue';
+import { GET_DATA } from '@/store/modules/publicWelfare/mutation-types';
+import PublicWelfareListItem from './ListItem.vue';
 
 export default {
-  name: 'Merchandise',
+  name: 'PublicWelfare',
   data() {
     return {
       loading: false,
     };
   },
   components: {
-    MerchandiseList,
-    MerchandiseSearch,
+    CommonHeader,
     ListScrollView,
+    PublicWelfareListItem,
   },
   computed: {
-    ...mapState('merchandise', {
+    ...mapState('publicWelfare', {
       list: state => state.list,
-      finished: state => state.finished,
       pageSize: state => state.pageSize,
       currentPage: state => state.currentPage,
+      finished: state => state.finished,
       condition: state => state.condition,
     }),
   },
   methods: {
     getData() {
-      return axios.get('/api/merchandise/list', {
+      return axios.get('/api/publicWelfare/list', {
         params: {
           pageSize: this.pageSize,
           currentPage: this.currentPage,
@@ -68,18 +80,13 @@ export default {
           this.$notify({ type: 'danger', message: '请求数据失败！' });
         });
     },
-    search() {
-      this[CLEAR]();
-      this.loading = true;
-      this.getData().finally(() => { this.loading = false; });
-    },
     scroll() {
       this.loading = true;
       this.getData().finally(() => {
         this.loading = false;
       });
     },
-    ...mapMutations('merchandise', [GET_DATA, CLEAR]),
+    ...mapMutations('publicWelfare', [GET_DATA]),
   },
   mounted() {
     if (this.list.length > 0 || this.finished) return;
@@ -90,34 +97,31 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .merchandise-container {
-    box-sizing: border-box;
+.public-welfare-container {
+  box-sizing: border-box;
+  padding-top: px2rem(44);
+  height: 100%;
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100%;
-    padding: px2rem(64) px2rem(10) 0 px2rem(10);
-    .header {
-      display: flex;
-      align-items: center;
-      position: fixed;
+    height: px2rem(44);
+    background-color: #07c160;
+    .release {
+      position: absolute;
       top: 0;
-      left: 0;
-      box-sizing: border-box;
-      width: 100%;
-      height: px2rem(54);
-      background-color: #ff0036;
-      padding-left: px2rem(24);
-      .arrow {
-        position: absolute;
-        top: px2rem(20);
-        left: px2rem(16);
-        width: px2rem(10);
-        height: px2rem(10);
-        border-top: 2px solid #fff;
-        border-left: 2px solid #fff;
-        transform: rotate(-45deg);
-        transform-origin: center center;
-        @include expand;
+      right: px2rem(10);
+      i {
+        line-height: px2rem(44);
+        font-size: px2rem(20);
+        font-weight: 700;
+        color: #fff;
       }
     }
   }
+  .list {
+    padding: px2rem(10);
+  }
+}
 </style>

@@ -1,27 +1,29 @@
 <template>
-  <scroll-view
-    ref="scroll"
-    :click="true"
-    :dataSource="list">
-    <div>
-      <home-slide></home-slide>
-      <div class="container">
-        <home-nav></home-nav>
-        <div class="home-market">
-          <header>
-            <h2 class="title">积分商城</h2>
-            <router-link to="/merchandise">
-              <span class="arrow"></span>
-            </router-link>
-          </header>
-          <merchandise-list :list="list" />
-          <div v-if="loading" class="loading">
-            <van-loading  type="spinner" color="#1989fa" />
+  <div class="home-container">
+    <scroll-view
+      ref="scroll"
+      :click="true"
+      :dataSource="list">
+      <div>
+        <home-slide></home-slide>
+        <div class="content-container">
+          <home-nav></home-nav>
+          <div class="home-market">
+            <header>
+              <h2 class="title">积分商城</h2>
+              <router-link to="/merchandise">
+                <span class="arrow"></span>
+              </router-link>
+            </header>
+            <merchandise-list :list="list" />
           </div>
         </div>
       </div>
+    </scroll-view>
+    <div v-if="loading" class="loading">
+      <van-loading type="spinner" color="#1989fa" />
     </div>
-  </scroll-view>
+  </div>
 </template>
 
 <script>
@@ -68,13 +70,17 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .container {
+  .home-container {
+    height: 100%;
+  }
+  .content-container {
     position: relative;
     margin: 0 px2rem(12);
     padding-top: px2rem(28);
     padding-bottom: px2rem(10);
   }
   .home-market {
+    position: relative;
     border-radius: px2rem(8);
     margin-top: px2rem(10);
     >header {
@@ -98,9 +104,6 @@ export default {
         transform-origin: center center;
         @include expand;
       }
-    }
-    .loading {
-      text-align: center;
     }
   }
 </style>

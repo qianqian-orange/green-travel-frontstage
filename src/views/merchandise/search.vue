@@ -2,8 +2,9 @@
   <van-search
     v-model="name"
     shape="round"
-    background="#e43130"
+    background="#ff0036"
     placeholder="请输入搜索关键字"
+    class="search"
     @input="search"
   />
 </template>
@@ -37,3 +38,9 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.search {
+  width: 100%;
+}
+</style>

@@ -52,7 +52,7 @@ export default {
   box-sizing: border-box;
   height: px2rem(300);
   width: 100%;
-  padding-top: px2rem(40);
+  padding-top: px2rem(44);
   background-color: #2B1420;
   overflow: hidden;
   &::before, &::after {
@@ -62,6 +62,7 @@ export default {
     height: px2rem(60);
     background-color: #F4F4F4;
     bottom: px2rem(-26);
+    z-index: 99;
   }
   &::before {
     left: -50%;

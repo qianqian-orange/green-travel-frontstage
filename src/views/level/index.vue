@@ -1,10 +1,7 @@
 <template>
   <div class="level-container">
     <div class="header">
-      <router-link to="/">
-        <span class="arrow"></span>
-      </router-link>
-      <h1 class="title">我的等级</h1>
+      <common-header to="/" title="我的等级" />
     </div>
     <scroll-view :dataSource="list">
       <div>
@@ -37,6 +34,7 @@
 import { mapState } from 'vuex';
 import axios from 'axios';
 import ScrollView from '@/components/ScrollView/index.vue';
+import CommonHeader from '@/components/CommonHeader/index.vue';
 import LevelHeader from './header.vue';
 
 export default {
@@ -55,6 +53,7 @@ export default {
   components: {
     LevelHeader,
     ScrollView,
+    CommonHeader,
   },
   computed: {
     ...mapState('user', {
@@ -101,33 +100,11 @@ export default {
     overflow: hidden;
     .header {
       display: flex;
-      align-items: center;
-      position: absolute;
       top: 0;
       left: 0;
       width: 100%;
-      height: px2rem(40);
-      padding-left: px2rem(16);
+      height: px2rem(44);
       background-color: #2B1420;
-      z-index: 99;
-      .title {
-        color: #fff;
-        font-size: px2rem(18);
-        height: 40px;
-        line-height: px2rem(40);
-        margin-left: px2rem(10);
-      }
-      .arrow {
-        position: relative;
-        display: block;
-        width: px2rem(10);
-        height: px2rem(10);
-        border-top: px2rem(2) solid #fff;
-        border-left: px2rem(2) solid #fff;
-        transform: rotate(-45deg);
-        transform-origin: center center;
-        @include expand;
-      }
     }
     .list {
       background-color: #f7f7f7;
@@ -166,9 +143,6 @@ export default {
           }
         }
       }
-    }
-    .loading {
-      text-align: center;
     }
  }
 </style>

@@ -33,6 +33,28 @@ const routes = [
     component: () => import('@/views/level/index.vue'),
   },
   {
+    path: '/publicWelfare',
+    name: 'PublicWelfare',
+    component: () => import('@/views/publicWelfare/index.vue'),
+    children: [
+      {
+        path: 'detail/:id',
+        name: 'PublicWelfareDetail',
+        component: () => import('@/views/publicWelfare/detail/index.vue'),
+      },
+      {
+        path: 'release',
+        name: 'PublicWelfareAdd',
+        component: () => import('@/views/publicWelfare/add.vue'),
+      },
+    ],
+  },
+  {
+    path: '/task',
+    name: 'Task',
+    component: () => import('@/views/task/index.vue'),
+  },
+  {
     path: '/',
     name: 'home',
     component: Home,

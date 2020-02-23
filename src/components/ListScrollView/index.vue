@@ -5,7 +5,13 @@
     :click="true"
     @scroll="scroll"
   >
-    <slot />
+    <div>
+      <slot />
+      <div class="end" v-if="dataSource.length > 0">
+        <van-divider>我是有底线的</van-divider>
+      </div>
+      <div class="empty" v-else>暂无相关数据</div>
+    </div>
   </scroll-view>
 </template>
 
@@ -43,3 +49,15 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.end {
+  overflow: hidden;
+}
+.empty {
+  text-align: center;
+  line-height: px2rem(30);
+  font-size: px2rem(14);
+  color: #999;
+}
+</style>

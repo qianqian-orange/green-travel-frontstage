@@ -2,7 +2,7 @@
 @import './adapter.scss';
 @import './function.scss';
 @import './mixin.scss';
-@import url('http://at.alicdn.com/t/font_1623824_0kgrgubpcpa9.css');
+@import url('http://at.alicdn.com/t/font_1623824_jkm38fiaj.css');
 
 html {
   height: 100%;
@@ -58,4 +58,35 @@ p {
       width: 100%;
     }
   }
+}
+
+.van-field__value {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  .van-field__body, .van-field__error-message, .van-field__word-limit {
+    width: 100%;
+  }
+}
+
+.loading {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 99;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.detail-enter, .detail-leave-to {
+  transform: translateX(100%);
+}
+.detail-enter-active, .detail-leave-active {
+    transition: transform .2s ease;
+}
+.detail-enter-to, .detail-leave {
+  transform: translateX(0);
 }

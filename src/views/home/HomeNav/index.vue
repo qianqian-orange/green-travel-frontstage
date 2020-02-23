@@ -6,11 +6,11 @@
       </div>
       <span class="title">签到</span>
     </router-link>
-    <router-link class="item" to="/signIn">
+    <router-link class="item" to="/publicWelfare">
       <span class="icon">
-        <i class="iconfont icon-rongyu"></i>
+        <i class="iconfont icon-gongyizhongxin"></i>
       </span>
-      <span class="title">成就</span>
+      <span class="title">公益</span>
     </router-link>
     <router-link class="item" to="/level">
       <span class="icon">
@@ -18,7 +18,7 @@
       </span>
       <span class="title">等级</span>
     </router-link>
-    <router-link class="item" to="/signIn">
+    <router-link class="item" to="/task">
       <span class="icon">
         <i class="iconfont icon-renwu"></i>
       </span>

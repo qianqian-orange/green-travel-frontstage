@@ -51,8 +51,49 @@ const routes = [
   },
   {
     path: '/task',
-    name: 'Task',
     component: () => import('@/views/task/index.vue'),
+    children: [
+      {
+        path: 'detail/:id',
+        component: () => import('@/views/task/detail.vue'),
+        // props: { to: '/task' },
+      },
+    ],
+  },
+  {
+    path: '/me',
+    name: 'Me',
+    component: () => import('@/views/me/index.vue'),
+    children: [
+      {
+        path: 'publicWelfareManagement',
+        name: 'PublicWelfareManagement',
+        component: () => import('@/views/me/publicWelfareManagement/index.vue'),
+        children: [
+          {
+            path: 'detail/:id',
+            name: 'PublicWelfareManagementDetail',
+            component: () => import('@/views/me/publicWelfareManagement/detail/index.vue'),
+          },
+        ],
+      },
+      {
+        path: 'task',
+        component: () => import('@/views/me/task/index.vue'),
+        children: [
+          {
+            path: 'detail/:id',
+            component: () => import('@/views/me/task/detail.vue'),
+            // props: { to: '/me/task' }, // 会注入到组件的props属性中
+          },
+        ],
+      },
+      {
+        path: 'coupon',
+        name: 'MyCoupon',
+        component: () => import('@/views/me/coupon/index.vue'),
+      },
+    ],
   },
   {
     path: '/',

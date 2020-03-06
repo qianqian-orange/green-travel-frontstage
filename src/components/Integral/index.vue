@@ -1,5 +1,5 @@
 <template>
-  <div class="integral">
+  <div class="integral" :style="{ color }">
     <i class="icon icon-tubiao311 iconfont"></i>
     <span class="pre-integral">{{ integral | preIntegral }}</span>
     <span class="last-integral">{{ integral | lastIntegral }}</span>
@@ -13,6 +13,10 @@ export default {
     integral: {
       type: Number,
       required: true,
+    },
+    color: {
+      type: String,
+      default: '#f42',
     },
   },
   filters: {
@@ -30,8 +34,7 @@ export default {
 <style lang="scss" scoped>
 .integral {
   display: flex;
-  align-items: flex-end;
-  color: #f42;
+  align-items: baseline;
   .icon {
     font-size: px2rem(14);
     margin-right: px2rem(2);

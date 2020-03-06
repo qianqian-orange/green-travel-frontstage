@@ -40,8 +40,8 @@ import axios from 'axios';
 import { mapMutations, mapState } from 'vuex';
 import { getDays } from '@/utils/date';
 import ScrollView from '@/components/ScrollView/index.vue';
-import { integrals } from '@/config/conversion';
-import { UPDATE_INTEGRAL } from '@/store/modules/user/mutation-types';
+import { integrals } from '@/config/signIn';
+import { SIGN_IN } from '@/store/modules/user/mutation-types';
 import SignInHeader from './header.vue';
 import SignInList from './list.vue';
 
@@ -91,7 +91,7 @@ export default {
         if (code === 0) {
           this.list[index].type = FINISHED;
           this.day += 1;
-          this[UPDATE_INTEGRAL]({ operator: '+', integral });
+          this[SIGN_IN](integral);
           this.$notify({ type: 'success', message: '签到成功' });
           return;
         }
@@ -131,16 +131,11 @@ export default {
         });
       }
     },
-    ...mapMutations('user', [UPDATE_INTEGRAL]),
+    ...mapMutations('user', [SIGN_IN]),
   },
   mounted() {
     this.loading = true;
-    axios.get('/api/signIn/data', {
-      params: {
-        year: this.date.getFullYear(),
-        month: this.date.getMonth() + 1,
-      },
-    })
+    axios.get('/api/signIn/data')
       .then((result) => {
         const { code, data: { id, days } } = result.data;
         if (code !== 0) {
@@ -222,6 +217,7 @@ export default {
       .main {
         position: relative;
         background-color: #fff;
+        min-height: 100%;
         .end {
           padding: px2rem(20) 0;
           text-align: center;

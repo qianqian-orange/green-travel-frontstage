@@ -8,7 +8,7 @@ export function getDays(date) {
     if (month === 2) {
       const year = date.getFullYear();
       const flag = leapYear(year);
-      return flag ? 28 : 29;
+      return flag ? 29 : 28;
     }
     return 30;
   }

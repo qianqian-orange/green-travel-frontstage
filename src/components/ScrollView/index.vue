@@ -19,6 +19,7 @@ export default {
   methods: {
     refresh() {
       this.$nextTick(() => {
+        // console.log(this.$refs['scroll-container'].children[0].offsetHeight);
         this.scroll.refresh();
       });
     },

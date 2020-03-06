@@ -13,15 +13,19 @@
       :interval="400"
       @scroll="scroll">
       <div class="list">
-        <public-welfare-list-item
-          v-for="item in list"
-          :key="item.id"
-          :id="item.id"
-          :path="item.path"
-          :title="item.title"
-          :endTime="item.end_time"
-          :donate="item.donate"
-          :integral="item.integral" />
+        <router-link class="link" v-for="item in list" :key="item.id" :to="{ path: `/publicWelfare/detail/${item.id}` }">
+          <public-welfare-list-item
+            :path="item.path"
+            :title="item.title"
+            :donate="item.donate"
+            :integral="item.integral">
+            <counter
+              v-if="overdue(item.end_time)"
+              :begin="Date.now()"
+              :end="new Date(item.end_time).getTime()" />
+            <van-tag v-else plain type="success">已截止</van-tag>
+          </public-welfare-list-item>
+        </router-link>
       </div>
     </list-scroll-view>
     <div v-if="loading" class="loading">
@@ -39,7 +43,8 @@ import { mapState, mapMutations } from 'vuex';
 import CommonHeader from '@/components/CommonHeader/index.vue';
 import ListScrollView from '@/components/ListScrollView/index.vue';
 import { GET_DATA } from '@/store/modules/publicWelfare/mutation-types';
-import PublicWelfareListItem from './ListItem.vue';
+import PublicWelfareListItem from '@/components/PublicWelfareListItem/index.vue';
+import Counter from '@/components/Counter/index.vue';
 
 export default {
   name: 'PublicWelfare',
@@ -52,6 +57,7 @@ export default {
     CommonHeader,
     ListScrollView,
     PublicWelfareListItem,
+    Counter,
   },
   computed: {
     ...mapState('publicWelfare', {
@@ -63,6 +69,9 @@ export default {
     }),
   },
   methods: {
+    overdue(endTime) {
+      return new Date(endTime).getTime() > Date.now();
+    },
     getData() {
       return axios.get('/api/publicWelfare/list', {
         params: {
@@ -122,6 +131,10 @@ export default {
   }
   .list {
     padding: px2rem(10);
+    .link {
+      display: block;
+      margin-bottom: px2rem(10);
+    }
   }
 }
 </style>

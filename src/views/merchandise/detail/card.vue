@@ -1,10 +1,7 @@
 <template>
   <div class="merchandise-detail-card">
     <div class="image-container">
-      <van-image
-        :src="merchandise.path"
-        class="image"
-      />
+      <van-image :src="merchandise.path" class="image" />
     </div>
     <div class="content-container">
       <p class="name">{{ merchandise.name }}</p>
@@ -15,7 +12,7 @@
           <span class="pre-integral">{{ merchandise.integral | preIntegral }}</span>
           <span class="last-integral">{{ merchandise.integral | lastIntegral }}</span>
         </div>
-        <van-button :disabled="loading" v-if="merchandise.stock" type="primary" size="small" @click="conversion">兑换</van-button>
+        <van-button v-if="merchandise.stock" type="primary" size="small" @click="conversion">兑换</van-button>
         <van-tag v-if="merchandise.stock === 0" plain type="danger">已售馨</van-tag>
       </div>
     </div>
@@ -23,10 +20,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-import { mapState, mapMutations } from 'vuex';
-import { UPDATE_INTEGRAL } from '@/store/modules/user/mutation-types';
-
 export default {
   name: 'MerchandiseDetailCard',
   props: {
@@ -34,16 +27,6 @@ export default {
       type: Object,
       required: true,
     },
-  },
-  data() {
-    return {
-      loading: false,
-    };
-  },
-  computed: {
-    ...mapState('user', {
-      user: state => state,
-    }),
   },
   filters: {
     preIntegral(integral) {
@@ -56,33 +39,14 @@ export default {
   },
   methods: {
     conversion() {
-      if (this.user.integral <= this.merchandise.integral) {
-        this.$toast({ type: 'fail', message: '积分不足！' });
-        return;
-      }
-      if (this.loading) return;
-      this.loading = true;
-      axios.post('/api/merchandise/conversion', {
-        id: this.merchandise.id,
-      }).then((result) => {
-        const { code } = result.data;
-        if (code !== 0) {
-          this.$notify({ type: 'danger', message: '兑换失败！' });
-          return;
-        }
-        this.$notify({ type: 'success', message: '兑换成功！' });
-        this[UPDATE_INTEGRAL]({ integral: this.merchandise.integral, operator: '-' });
-        this.$emit('conversion');
-      }).finally(() => {
-        this.loading = false;
-      });
+      this.$emit('conversion');
     },
-    ...mapMutations('user', [UPDATE_INTEGRAL]),
   },
 };
 </script>
 
 <style lang="scss" scoped>
+.merchandise-detail-card {
   .image-container {
     position: relative;
     width: 100%;
@@ -136,4 +100,5 @@ export default {
       }
     }
   }
+}
 </style>

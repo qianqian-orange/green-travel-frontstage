@@ -23,7 +23,7 @@
 <script>
 import axios from 'axios';
 import { mapState, mapMutations } from 'vuex';
-import { UPDATE_INTEGRAL } from '@/store/modules/user/mutation-types';
+import { DONATE } from '@/store/modules/user/mutation-types';
 
 export default {
   name: 'PublicWelfareCard',
@@ -63,8 +63,8 @@ export default {
         const { code } = result.data;
         if (code === 0) {
           this.$notify({ type: 'success', message: '捐赠成功！' });
-          this[UPDATE_INTEGRAL]({ integral: this.quantity, operator: '-' });
-          this.$emit('donate', this.quantity);
+          this.target.donate += this.quantity;
+          this[DONATE](this.quantity);
           return;
         }
         this.$notify({ type: 'danger', message: '捐赠失败！' });
@@ -72,7 +72,7 @@ export default {
         this.loading = false;
       });
     },
-    ...mapMutations('user', [UPDATE_INTEGRAL]),
+    ...mapMutations('user', [DONATE]),
   },
 };
 </script>
@@ -84,7 +84,7 @@ export default {
     height: px2rem(140);
     .image {
       width: 100%;
-      height: 100%;
+      height: px2rem(140);
     }
   }
   .content-container {
@@ -107,7 +107,6 @@ export default {
       justify-content: space-between;
       align-items: center;
       font-size: px2rem(14);
-      margin-bottom: px2rem(8);
       .integral {
         color: #222;
         .current {
@@ -118,6 +117,7 @@ export default {
     .donate {
       display: flex;
       justify-content: flex-end;
+      margin-top: px2rem(8);
       .button {
         margin-left: px2rem(10);
       }

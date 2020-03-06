@@ -22,8 +22,11 @@ const getters = {
 const mutations = {
   [GET_DATA](state, payload) {
     state.list = state.list.concat(payload);
+    if (payload.length === 0) {
+      state.finished = true;
+      return;
+    }
     state.currentPage += 1;
-    if (payload.length === 0) state.finished = true;
   },
   [CONVERSION](state, { id }) {
     const merchandise = state.list.find(item => item.id === id);

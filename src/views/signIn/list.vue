@@ -60,6 +60,11 @@ export default {
     .item {
       display: flex;
       justify-content: space-between;
+      &.finished:last-child {
+        .left::after {
+          visibility: hidden;
+        }
+      }
       &.finished, &.active {
         .logo {
           @include bg('./imgs/gold-coin.png');

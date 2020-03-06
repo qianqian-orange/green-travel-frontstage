@@ -14,7 +14,7 @@
           <li class="item" v-for="(item, index) in list" :key="index">
             <van-image
               class="image"
-              :src="require(`${item.path}`)" />
+              :src="require(`@/assets/imgs/level/${item.path}`)" />
             <div class="content-container">
               <p class="level">Lv.{{ index + 1 }}</p>
               <p class="growth"><span>{{ item.growth }}</span> 成长值</p>
@@ -35,6 +35,7 @@ import { mapState } from 'vuex';
 import axios from 'axios';
 import ScrollView from '@/components/ScrollView/index.vue';
 import CommonHeader from '@/components/CommonHeader/index.vue';
+import { growths } from '@/config/level';
 import LevelHeader from './header.vue';
 
 export default {
@@ -42,11 +43,7 @@ export default {
   data() {
     return {
       list: [],
-      growths: [
-        0, 400, 900, 1500, 2500,
-        3600, 4900, 6400, 8000, 10000,
-        15000, 20000, 25000, 36000, 49000,
-      ],
+      growths,
       loading: false,
     };
   },
@@ -63,20 +60,20 @@ export default {
   },
   mounted() {
     this.loading = true;
-    axios.get('/api/level/precents')
+    axios.get('/api/level/percents')
       .then((result) => {
         const { code, data } = result.data;
         if (code === 0) {
           for (let i = 0; i < this.level; i += 1) {
             this.list.push({
-              path: `./imgs/level${i + 1}-active.png`,
+              path: `level${i + 1}-active.png`,
               percent: data[i],
               growth: this.growths[i],
             });
           }
           for (let i = this.level; i < 15; i += 1) {
             this.list.push({
-              path: `./imgs/level${i + 1}-wait.png`,
+              path: `level${i + 1}-wait.png`,
               percent: data[i],
               growth: this.growths[i],
             });
@@ -94,12 +91,14 @@ export default {
 
 <style lang="scss" scoped>
  .level-container {
+    box-sizing: border-box;
     position: relative;
     width: 100%;
     height: 100%;
+    padding-top: px2rem(44);
     overflow: hidden;
     .header {
-      display: flex;
+      position: fixed;
       top: 0;
       left: 0;
       width: 100%;
@@ -120,7 +119,7 @@ export default {
         }
         .image {
           width: px2rem(35);
-          height: px2rem(28);
+          height: px2rem(26);
           margin-right: px2rem(10);
         }
         .content-container {

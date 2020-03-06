@@ -1,9 +1,29 @@
 export const SAVE = 'SAVE';
 export const CLEAR = 'CLEAR';
-export const UPDATE_INTEGRAL = 'UPDATE_INTEGRAL';
+export const SIGN_IN = 'SIGN_IN';
+export const GET_PUBLIC_WELFARE_DATA = 'GET_PUBLIC_WELFARE_DATA';
+export const GET_COUPON_DATA = 'GET_COUPON_DATA';
+export const GET_TASK_DATA = 'GET_TASK_DATA';
+export const GET_TASK_COUPONS_DATA = 'GET_TASK_COUPONS_DATA';
+export const ADD_TASK = 'ADD_TASK';
+export const UPDATE_TASK_STATE = 'UPDATE_TASK_STATE';
+export const ACQUIRE = 'ACQUIRE';
+export const CLEAR_COUPON = 'CLEAR_COUPON';
+export const DONATE = 'DONATE';
+export const CONVERSION = 'CONVERSION';
 
 export default {
   SAVE,
   CLEAR,
-  UPDATE_INTEGRAL,
+  SIGN_IN,
+  GET_PUBLIC_WELFARE_DATA,
+  GET_COUPON_DATA,
+  GET_TASK_DATA,
+  GET_TASK_COUPONS_DATA,
+  ADD_TASK,
+  UPDATE_TASK_STATE,
+  ACQUIRE,
+  CLEAR_COUPON,
+  DONATE,
+  CONVERSION,
 };

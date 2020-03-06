@@ -1,7 +1,19 @@
 <template>
   <div class="home-container">
+    <div class="header" ref="header">
+      <router-link class="link" to="/merchandise">
+        <div class="search">
+          <van-icon class="icon" name="search" />
+          <p class="text">搜索商品</p>
+        </div>
+      </router-link>
+      <router-link to="/me">
+        <span class="me">
+          <i class="icon iconfont icon-wode"></i>
+        </span>
+      </router-link>
+    </div>
     <scroll-view
-      ref="scroll"
       :click="true"
       :dataSource="list">
       <div>
@@ -71,7 +83,54 @@ export default {
 
 <style lang="scss" scoped>
   .home-container {
+    box-sizing: border-box;
     height: 100%;
+    padding-top: px2rem(54);
+  }
+  .header {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: px2rem(54);
+    padding: 0 px2rem(10);
+    background-color: rgba(255, 0, 54, 1);
+    z-index: 1;
+    .link {
+      flex: 1;
+    }
+    .search {
+      display: flex;
+      align-items: center;
+      height: px2rem(34);
+      padding: 0 px2rem(10);
+      background-color: #fff;
+      border-radius: px2rem(4);
+      color: #999;
+      .icon {
+        font-size: px2rem(20);
+        margin-right: px2rem(4);
+      }
+      .text {
+        font-size: px2rem(14);
+      }
+    }
+    .me {
+      position: relative;
+      display: block;
+      width: px2rem(24);
+      height: px2rem(24);
+      color: #fff;
+      font-weight: 700;
+      margin-left: px2rem(10);
+      @include expand();
+      .icon {
+        font-size: px2rem(24);
+      }
+    }
   }
   .content-container {
     position: relative;

@@ -6,7 +6,7 @@ const whiteList = ['/login']; // no redirect whitelist
 
 router.beforeEach(async (to, from, next) => {
   if (store.state.user.id === -1) {
-    const { data: { user } } = await axios.get('/api/user');
+    const { data: { user } } = await axios.get('/api/user/detail');
     if (user) store.dispatch('user/save', user);
   }
   if (store.state.user.id !== -1) {

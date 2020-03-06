@@ -16,6 +16,8 @@ import {
   Uploader,
   DatetimePicker,
   Stepper,
+  Cell,
+  CellGroup,
 } from 'vant';
 import BScroll from '@better-scroll/core';
 import Slide from '@better-scroll/slide';
@@ -44,6 +46,8 @@ Vue.use(Uploader);
 Vue.use(DatetimePicker);
 Vue.use(Stepper);
 BScroll.use(Slide);
+Vue.use(Cell);
+Vue.use(CellGroup);
 Vue.config.productionTip = false;
 
 new Vue({

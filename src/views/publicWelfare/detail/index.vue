@@ -1,27 +1,18 @@
 <template>
-  <div class="public-welfare-detail-container">
-    <scroll-header :to="to" title="公益详情" :visible="visible" />
+  <div class="public-welfare-detail fullscreen-fixed-container">
+    <scroll-header :to="to" />
     <public-welfare-card
       v-if="target"
-      :target="target"
-      @donate="donate" />
+      :target="target" />
     <van-divider :style="{ color: '#222' }">捐赠排名</van-divider>
-    <div class="list-container">
+    <div class="ank-list-container">
       <list-scroll-view
         :dataSource="ranks"
         :loading="loading"
         :finished="finished"
         :interval="400"
         @scroll="scroll">
-        <ul class="list">
-          <li class="item" v-for="(item, index) in ranks" :key="item.id">
-            <span class="rank" :class="icon(index)">{{ index + 1 }}</span>
-            <div class="content">
-              <span class="name">{{ item.name }}</span>
-              <integral :integral="item.integral" />
-            </div>
-          </li>
-        </ul>
+        <rank :list="ranks"/>
       </list-scroll-view>
     </div>
     <div v-if="loading" class="loading">
@@ -35,14 +26,13 @@ import axios from 'axios';
 import { mapState } from 'vuex';
 import ScrollHeader from '@/components/ScrollHeader/index.vue';
 import ListScrollView from '@/components/ListScrollView/index.vue';
-import Integral from '@/components/Integral/index.vue';
+import Rank from '@/components/Rank/index.vue';
 import PublicWelfareCard from './card.vue';
 
 export default {
   name: 'PublicWelfareDetail',
   data() {
     return {
-      visible: false,
       target: null,
       to: '/publicWelfare',
       loading: false,
@@ -56,7 +46,7 @@ export default {
     ScrollHeader,
     PublicWelfareCard,
     ListScrollView,
-    Integral,
+    Rank,
   },
   computed: {
     ...mapState('publicWelfare', {
@@ -64,14 +54,6 @@ export default {
     }),
   },
   methods: {
-    donate(donate) {
-      this.target.donate += donate;
-      this.currentPage = 1;
-      this.ranks = [];
-      this.finished = false;
-      this.loading = true;
-      this.getRank().finally(() => { this.loading = false; });
-    },
     getRank() {
       this.loading = true;
       return axios.get('/api/publicWelfare/rank', {
@@ -98,12 +80,6 @@ export default {
       this.getRank().finally(() => {
         this.loading = false;
       });
-    },
-    icon(index) {
-      if (index === 0) return 'gold-cup';
-      if (index === 1) return 'sliver-cup';
-      if (index === 2) return 'copper-cup';
-      return '';
     },
   },
   mounted() {
@@ -135,63 +111,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.public-welfare-detail-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
+.public-welfare-detail {
   display: flex;
   flex-direction: column;
-  background-color: #fafafc;
-  .list-container {
+  .rank-list-container {
     flex: 1;
     overflow: hidden;
-  }
-  .list {
-    background-color: #fff;
-    padding: 0 px2rem(10);
-    .item {
-      display: flex;
-      align-items: center;
-      height: px2rem(44);
-      border-bottom: 1px solid #f1f1f1;
-      &:last-child {
-        border-bottom: none;
-      }
-      .rank {
-        width: px2rem(25);
-        height: px2rem(24);
-        line-height: px2rem(24);
-        font-size: px2rem(18);
-        font-weight: 700;
-        text-align: center;
-        color: #F07438;
-        &.gold-cup {
-          color: transparent;
-          @include bg('./imgs/gold-cup.png');
-        }
-        &.sliver-cup {
-          color: transparent;
-          @include bg('./imgs/sliver-cup.png');
-        }
-        &.copper-cup {
-          color: transparent;
-          @include bg('./imgs/copper-cup.png');
-        }
-      }
-      .content {
-        flex: 1;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 0 px2rem(10);
-        .name {
-          font-size: px2rem(14);
-          color: #222;
-        }
-      }
-    }
   }
 }
 </style>

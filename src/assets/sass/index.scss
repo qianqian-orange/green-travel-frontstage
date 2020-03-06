@@ -2,7 +2,7 @@
 @import './adapter.scss';
 @import './function.scss';
 @import './mixin.scss';
-@import url('http://at.alicdn.com/t/font_1623824_jkm38fiaj.css');
+@import url('http://at.alicdn.com/t/font_1623824_4lg4gbf5ly6.css');
 
 html {
   height: 100%;
@@ -89,4 +89,13 @@ p {
 }
 .detail-enter-to, .detail-leave {
   transform: translateX(0);
+}
+
+.fullscreen-fixed-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: #fafafc;
 }

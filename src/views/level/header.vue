@@ -3,7 +3,7 @@
     <div class="image-container">
       <van-image
         class="image"
-        :src="require(`./imgs/level${level}-active.png`)" />
+        :src="require(`@/assets/imgs/level/level${level}-active.png`)" />
     </div>
     <p class="primary">Lv.{{ level }}</p>
     <div class="progress-container">
@@ -49,10 +49,8 @@ export default {
 <style lang="scss" scoped>
 .header-container {
   position: relative;
-  box-sizing: border-box;
-  height: px2rem(300);
+  height: px2rem(256);
   width: 100%;
-  padding-top: px2rem(44);
   background-color: #2B1420;
   overflow: hidden;
   &::before, &::after {

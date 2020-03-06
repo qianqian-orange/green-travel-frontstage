@@ -70,7 +70,7 @@
           round
           block
           native-type="submit"
-          color="linear-gradient(to right, #ff6034, #ee0a24)">提交</van-button>
+          color="linear-gradient(to right, #6cd557, #34c2aa)">提交</van-button>
       </div>
     </van-form>
   </div>
@@ -166,9 +166,9 @@ export default {
       f.status = 'uploading';
       f.message = '上传中...';
       const fd = new FormData();
-      fd.append('task', f.file);
-      fd.append('name', 'task');
-      axios.post('http://localhost:3000/api/upload/task', fd, {
+      fd.append('publicWelfare', f.file);
+      fd.append('name', 'publicWelfare');
+      axios.post('http://localhost:3000/api/upload/publicWelfare', fd, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
@@ -208,7 +208,7 @@ export default {
   background-color: #fafafc;
   .header {
     height: px2rem(44);
-    background-color: #ff0036;
+    background-color: #07c160;
     margin-bottom: px2rem(10);
   }
 }
@@ -219,7 +219,7 @@ export default {
 .public-welfare-add-container {
   .van-image.van-uploader__preview-image {
     width: px2rem(200);
-    height: px2rem(110);
+    height: px2rem(80);
   }
 }
 </style>

@@ -5,7 +5,7 @@
     </div>
     <div class="content-container">
       <h1 class="title">亲，您还没登录哟！</h1>
-      <a href="/api/login">
+      <a href="/user/api/login">
         <i class="icon iconfont icon-github1"></i>
       </a>
     </div>

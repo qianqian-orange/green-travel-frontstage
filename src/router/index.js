@@ -93,7 +93,23 @@ const routes = [
         name: 'MyCoupon',
         component: () => import('@/views/me/coupon/index.vue'),
       },
+      {
+        path: 'conversion',
+        name: 'MyConversion',
+        component: () => import('@/views/me/conversion/index.vue'),
+        children: [
+          {
+            path: 'detail/:id',
+            component: () => import('@/views/me/conversion/detail.vue'),
+          },
+        ],
+      },
     ],
+  },
+  {
+    path: '/analysis',
+    name: 'Analysis',
+    component: () => import('@/views/analysis/index.vue'),
   },
   {
     path: '/',

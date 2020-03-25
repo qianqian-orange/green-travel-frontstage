@@ -168,7 +168,8 @@ export default {
       const fd = new FormData();
       fd.append('publicWelfare', f.file);
       fd.append('name', 'publicWelfare');
-      axios.post('http://localhost:3000/api/upload/publicWelfare', fd, {
+      // http://193.112.56.84/admin/api/upload/publicWelfare
+      axios.post('http://localhost:3000/admin/api/upload/publicWelfare', fd, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

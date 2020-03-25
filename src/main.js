@@ -18,6 +18,7 @@ import {
   Stepper,
   Cell,
   CellGroup,
+  SwipeCell,
 } from 'vant';
 import BScroll from '@better-scroll/core';
 import Slide from '@better-scroll/slide';
@@ -45,10 +46,19 @@ Vue.use(Field);
 Vue.use(Uploader);
 Vue.use(DatetimePicker);
 Vue.use(Stepper);
-BScroll.use(Slide);
 Vue.use(Cell);
 Vue.use(CellGroup);
+Vue.use(SwipeCell);
+
+BScroll.use(Slide);
 Vue.config.productionTip = false;
+
+Vue.filter('preIntegral', value => parseInt(value, 10));
+
+Vue.filter('lastIntegral', (value) => {
+  const [, decimal] = `${value}`.split('.');
+  return decimal ? `.${decimal}` : '';
+});
 
 new Vue({
   router,

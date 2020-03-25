@@ -1,7 +1,7 @@
 <template>
   <div class="my-public-welfare-container fullscreen-fixed-container">
     <div class="header">
-      <common-header to="/me"/>
+      <common-header to="/me" title="我的公益" />
     </div>
     <list-scroll-view
       :dataSource="list"
@@ -33,10 +33,10 @@
 <script>
 import axios from 'axios';
 import { mapState, mapMutations } from 'vuex';
-import CommonHeader from '@/components/CommonHeader/index.vue';
-import ListScrollView from '@/components/ListScrollView/index.vue';
 import { GET_PUBLIC_WELFARE_DATA } from '@/store/modules/user/mutation-types';
 import loadmoreMixin from '@/mixins/loadmore';
+import CommonHeader from '@/components/CommonHeader/index.vue';
+import ListScrollView from '@/components/ListScrollView/index.vue';
 import PublicWelfareListItem from '@/components/PublicWelfareListItem/index.vue';
 
 export default {

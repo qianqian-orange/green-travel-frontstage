@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  publicPath: '/',
+  publicPath: '/user',
   outputDir: 'server/public',
   assetsDir: 'static',
   productionSourceMap: false,
@@ -22,7 +22,7 @@ module.exports = {
   devServer: {
     port: 8001,
     proxy: {
-      '^/api': {
+      '^/user/api': {
         target: 'http://localhost:8000',
       },
       '^/upload': {

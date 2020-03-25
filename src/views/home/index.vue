@@ -17,9 +17,12 @@
       :click="true"
       :dataSource="list">
       <div>
-        <home-slide></home-slide>
+        <home-slide />
         <div class="content-container">
-          <home-nav></home-nav>
+          <router-link to="/analysis">
+            <home-detail />
+          </router-link>
+          <home-nav />
           <div class="home-market">
             <header>
               <h2 class="title">积分商城</h2>
@@ -44,6 +47,7 @@ import ScrollView from '@/components/ScrollView/index.vue';
 import MerchandiseList from '@/components/MerchandiseList/index.vue';
 import HomeSlide from './HomeSlide/index.vue';
 import HomeNav from './HomeNav/index.vue';
+import HomeDetail from './HomeDetail/index.vue';
 
 export default {
   data() {
@@ -55,6 +59,7 @@ export default {
   components: {
     HomeSlide,
     HomeNav,
+    HomeDetail,
     MerchandiseList,
     ScrollView,
   },

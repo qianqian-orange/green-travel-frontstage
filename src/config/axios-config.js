@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { Notify } from 'vant';
 
+axios.defaults.baseURL = '/user';
 axios.defaults.timeout = 5000;
 
 axios.interceptors.request.use(config => config, (e) => {

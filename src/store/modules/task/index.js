@@ -6,7 +6,7 @@ import {
 
 const initState = {
   list: [],
-  pageSize: 5,
+  pageSize: 10,
   currentPage: 1,
   finished: false,
   condition: {},

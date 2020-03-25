@@ -19,15 +19,6 @@ export default {
       default: '#f42',
     },
   },
-  filters: {
-    preIntegral(integral) {
-      return parseInt(integral, 10);
-    },
-    lastIntegral(integral) {
-      const [, decimal] = `${integral}`.split('.');
-      return decimal ? `.${decimal}` : '';
-    },
-  },
 };
 </script>
 

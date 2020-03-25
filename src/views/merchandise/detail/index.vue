@@ -7,12 +7,20 @@
       @scroll="scroll"
       ref="scroll">
       <div class="scroll-contaienr">
-        <merchandise-detail-card v-if="merchandise" :merchandise="merchandise" @conversion="toggle" />
+        <merchandise-detail-card
+          v-if="merchandise"
+          :path="merchandise.path"
+          :name="merchandise.name"
+          :description="merchandise.description"
+          :integral="merchandise.integral">
+          <van-button v-if="merchandise.stock" type="primary" size="small" @click="toggle">兑换</van-button>
+          <van-tag v-if="merchandise.stock === 0" plain type="danger">已售馨</van-tag>
+        </merchandise-detail-card>
         <div v-if="others.length > 0">
-        <van-divider :style="{ color: '#222' }">看了又看</van-divider>
-        <div class="list-container">
-          <merchandise-list :list="others" />
-        </div>
+          <van-divider :style="{ color: '#222' }">看了又看</van-divider>
+          <div class="list-container">
+            <merchandise-list :list="others" />
+          </div>
         </div>
       </div>
     </scroll-view>
@@ -46,7 +54,7 @@ import ScrollView from '@/components/ScrollView/index.vue';
 import ScrollHeader from '@/components/ScrollHeader/index.vue';
 import MerchandiseList from '@/components/MerchandiseList/index.vue';
 import CouponList from '@/components/CouponList/index.vue';
-import MerchandiseDetailCard from './card.vue';
+import MerchandiseDetailCard from '@/components/MerchandiseDetailCard/index.vue';
 
 export default {
   name: 'MerchandiseDetail',
